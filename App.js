@@ -1,54 +1,88 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, View, Image} from 'react-native';
+import { View, StyleSheet, Alert, Image } from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
 
-  const telaLogin = ({ navigation }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+const telaLogin = ({ navigation }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    const fazerLogin = () => {
-      if (email === 'teste@email.com' && password === '123456') {
-        Alert.alert('Sucesso', 'Login realizado com sucesso!');
-        navigation.navigate('Home');
-      } else {
-        Alert.alert('Erro', 'Credenciais inválidas');
-      }
-    };
+  const fazerLogin = () => {
+    if (email === 'pipa@email.com' && password === '123456') {
+      Alert.alert('Sucesso', 'Login realizado com sucesso!');
+      navigation.navigate('Home');
+    } else {
+      Alert.alert('Erro', 'Credenciais inválidas');
+    }
+  };
 
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.logo}
-        source={require('./assets/logo.png')}
-      />
-      <Text>Bem-vindo(a)</Text>
-      <Text>Faça login para continuar</Text>
-      <StatusBar style="auto" />
+      <Image source={require('./assets/logo.png')} style={styles.logo} />
+      <Text style={styles.title}>Bem-vindo(a)</Text>
+      <Text style={styles.subtitle}>Faça login para continuar</Text>
       <TextInput
-          label="seu email"
-          onChangeText={setEmail}
-          value={email}
-          placeholder="digite seu email"
-          keyboardType="email-address"
-          style={styles.input}
-        />
+        label="Seu Email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
+        style={styles.input}
+      />
+      <TextInput
+        label="Sua Senha"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+        style={styles.input}
+      />
+      <Button mode="contained" onPress={fazerLogin} style={styles.button}>
+        Entrar
+      </Button>
+      <Button mode="text" onPress={() => navigation.navigate('Register')} style={styles.textButton}>
+       Novo por aqui? Criar uma conta
+      </Button>
     </View>
   );
-}
-
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#ffffff',
   },
   logo: {
-    width: 100,
-    height: 100,
-  }
+    width: 150,
+    height: 150,
+    marginBottom: 30,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 5,
+  },
+  subtitle: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 20,
+    color: '#666',
+  },
+  input: {
+    width: '100%',
+    marginBottom: 10,
+  },
+  button: {
+    width: '100%',
+    marginTop: 10,
+    borderRadius: 12,
+    backgroundColor: "#000000"
+  },
+  textButton: {
+    marginTop: 10,
+  },
 });
 
 export default telaLogin;
