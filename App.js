@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Alert, Image } from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
 
+import { ButtonComponent } from './components/button';
+
 const telaLogin = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  
   const fazerLogin = () => {
     if (email === 'pipa@email.com' && password === '123456') {
       Alert.alert('Sucesso', 'Login realizado com sucesso!');
@@ -35,12 +37,7 @@ const telaLogin = ({ navigation }) => {
         secureTextEntry
         style={styles.input}
       />
-      <Button mode="contained" onPress={fazerLogin} style={styles.button}>
-        Entrar
-      </Button>
-      <Button mode="text" onPress={() => navigation.navigate('Register')} style={styles.textButton}>
-       Novo por aqui? Criar uma conta
-      </Button>
+      <ButtonComponent tile={"Fazer login"}  />
     </View>
   );
 };
