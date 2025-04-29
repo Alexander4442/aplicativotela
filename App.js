@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Alert, Image } from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
 
-import { ButtonComponent } from './components/button';
+import BotaoPersonalizado from './components/button/';
 
 const telaLogin = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
+
+
   const fazerLogin = () => {
     if (email === 'pipa@email.com' && password === '123456') {
       Alert.alert('Sucesso', 'Login realizado com sucesso!');
-      navigation.navigate('Home');
+      navigation.navigate('Home');  // Navegar para a tela Home após o login
     } else {
       Alert.alert('Erro', 'Credenciais inválidas');
     }
@@ -25,6 +26,7 @@ const telaLogin = ({ navigation }) => {
       <TextInput
         label="Seu Email"
         value={email}
+        textContentType='emailAddress'
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCapitalize="none"
@@ -37,8 +39,12 @@ const telaLogin = ({ navigation }) => {
         secureTextEntry
         style={styles.input}
       />
-      <ButtonComponent tile={"Fazer login"}  />
-    </View>
+      <BotaoPersonalizado
+        titulo="ENTRAR AGORA"
+        onPress={fazerLogin}
+        backgroundColor="#27ae60"
+        corTexto="#ffffff"
+      />    </View>
   );
 };
 
